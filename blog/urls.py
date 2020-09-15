@@ -20,6 +20,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("", views.index),
+    path("", views.index, name="index"),
+    path("<int:pk>/", views.detail, name="detail"),
 ]
 # ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
