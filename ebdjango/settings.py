@@ -85,12 +85,12 @@ WSGI_APPLICATION = "ebdjango.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": "portfolio",
         "USER": "dexter",
         "PASSWORD": "Public-django-db",
-        "HOST": "portfolio.cluster-ct6vqujv0vuv.eu-west-2.rds.amazonaws.com",
-        "PORT": "3306",
+        "HOST": "portfolio.ct6vqujv0vuv.eu-west-2.rds.amazonaws.com",
+        "PORT": "5432",
     }
 }
 

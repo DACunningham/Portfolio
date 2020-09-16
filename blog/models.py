@@ -22,4 +22,4 @@ class Article(models.Model):
 
     def __str__(self):
         """Unicode representation of Article."""
-        return str(self.id) + self.title
+        return str(self.id) + " | " + self.title
