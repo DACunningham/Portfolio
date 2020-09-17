@@ -10,7 +10,9 @@ class Article(models.Model):
     sub_title = models.CharField(max_length=250, blank=True)
     date_submitted = models.DateTimeField(auto_now=False, auto_now_add=True)
     date_published = models.DateTimeField(auto_now=False, auto_now_add=False)
-    date_updated = models.DateTimeField(auto_now=False, auto_now_add=False, null=True)
+    date_updated = models.DateTimeField(
+        auto_now=False, auto_now_add=False, null=True, blank=True
+    )
     author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True)
     body = models.TextField()
 
