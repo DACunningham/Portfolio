@@ -5,4 +5,4 @@ from django.views.generic import TemplateView
 # Create your views here.
 class HomePageView(TemplateView):
     def get(self, request, **kwargs):
-        return render(request, "helloworld/index.html", context=None)
+        return render(request, "site_base/index.html", context=None)

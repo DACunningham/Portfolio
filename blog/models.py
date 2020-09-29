@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.conf import settings
+from datetime import datetime
+import pytz
 
 # Create your models here.
 class Article(models.Model):
@@ -25,3 +28,13 @@ class Article(models.Model):
     def __str__(self):
         """Unicode representation of Article."""
         return str(self.id) + " | " + self.title
+
+    @property
+    def last_updated(self):
+        if self.date_updated is None:
+            return self.date_published
+        else:
+            last_upd = (
+                datetime.now(pytz.timezone(settings.TIME_ZONE)) - self.date_updated
+            )
+            return last_upd
