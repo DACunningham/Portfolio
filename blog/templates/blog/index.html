@@ -18,7 +18,20 @@
                 <div class="card-body">
                     <h5 class="card-title"><a href="/blog/{{ article.id }}/">{{ article.title }}</a></h5>
                     <p class="card-text">{{ article.sub_title }}</p>
-                    <p class="card-text"><small class="text-muted">Last updated {{ article.last_updated }}</small></p>
+
+                    <p class="card-text">
+                    <small class="text-muted">
+                        Date Published {{ article.date_published|date:"H:i (e), j M Y" }}
+                    </small>
+                    </p>
+
+                    {% if article.last_updated %}
+                    <p>
+                    <small class="text-muted">
+                        {{ article.last_updated }}
+                    </small>
+                    </p>
+                    {% endif %}
                 </div>
             </div>
         </div>
