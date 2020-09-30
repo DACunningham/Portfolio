@@ -2,6 +2,10 @@
 {% block head_title %} {% endblock head_title %}
 {% block content %}
 
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/vs.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+
 <div class="jumbotron jumbotron-fluid">
     <div class="container mt-55">
         <h1 class="display-4">{{ article.title }}</h1>
@@ -13,7 +17,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10">
-            {{ article.body }}
+            {{ article.body | safe }}
         </div>
     </div>
     <div class="row">
@@ -22,5 +26,7 @@
         </div>
     </div>
 </div>
+
+<script>hljs.initHighlightingOnLoad();</script>
 
 {% endblock content %}

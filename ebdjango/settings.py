@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Third part apps
+    'ckeditor',
+    'ckeditor_uploader',
     # Custom apps
     "site_base",
     "blog",
@@ -75,23 +77,23 @@ WSGI_APPLICATION = "ebdjango.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-#     }
-# }
-
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "portfolio",
-        "USER": "dexter",
-        "PASSWORD": "Public-django-db",
-        "HOST": "portfolio.ct6vqujv0vuv.eu-west-2.rds.amazonaws.com",
-        "PORT": "5432",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "portfolio",
+#         "USER": "dexter",
+#         "PASSWORD": "Public-django-db",
+#         "HOST": "portfolio.ct6vqujv0vuv.eu-west-2.rds.amazonaws.com",
+#         "PORT": "5432",
+#     }
+# }
 
 
 # Password validation
@@ -135,3 +137,58 @@ STATIC_ROOT = "static"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# CKEditor config
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+CKEDITOR_UPLOAD_PATH = "uploadsCK/" # <-- this folder you uploaded image saved in s3 under media folder 
+CKEDITOR_RESTRICT_BY_USER = True
+
+CKEDITOR_CONFIGS={
+  'default': {
+    'width': '100%',
+    'height': 600,
+    'toolbar': 'Custom',
+    'extraPlugins': ','.join([
+      'codesnippet',
+      'youtube'
+    ]),
+    'toolbar_Custom': [
+      [
+        'Bold',
+        'Italic',
+        'Underline'
+      ],
+      [
+        'Font',
+        'FontSize',
+        'TextColor',
+        'BGColor'
+      ],
+      [
+        'NumberedList',
+        'BulletedList',
+        '-',
+        'Outdent',
+        'Indent',
+        '-',
+        'JustifyLeft',
+        'JustifyCenter',
+        'JustifyRight',
+        'JustifyBlock'
+      ],
+      [
+        'Link',
+        'Unlink'
+      ],
+      [
+        'RemoveFormat',
+        'Source',
+        'CodeSnippet',
+        'Image',
+        'Youtube'
+      ]
+    ],
+    
+  },
+}

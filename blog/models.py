@@ -4,6 +4,8 @@ from django.conf import settings
 from datetime import datetime
 import pytz
 
+from ckeditor_uploader.fields import RichTextUploadingField
+
 # Create your models here.
 class Article(models.Model):
     """Model definition for Article."""
@@ -17,11 +19,19 @@ class Article(models.Model):
         auto_now=False, auto_now_add=False, null=True, blank=True
     )
     author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True)
-    body = models.TextField()
+    body = RichTextUploadingField(blank=True,
+                                config_name="default",
+                                external_plugin_resources=[(
+                                    "youtube",
+                                    "/static/site_base/vendor/ckeditor_plugins/youtube/youtube/",
+                                    "plugin.js",
+                                )],
+                                )
 
     class Meta:
         """Meta definition for Article."""
 
+        ordering = ["-date_published"]
         verbose_name = "Article"
         verbose_name_plural = "Articles"
 
