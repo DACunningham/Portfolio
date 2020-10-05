@@ -10,7 +10,6 @@ from ckeditor_uploader.fields import RichTextUploadingField
 class Article(models.Model):
     """Model definition for Article."""
 
-    # TODO: Define fields here
     title = models.CharField(max_length=250)
     sub_title = models.CharField(max_length=250, blank=True)
     date_submitted = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -41,10 +40,22 @@ class Article(models.Model):
 
     @property
     def last_updated(self):
+        prefix = "Last updated about"
         if self.date_updated is None:
-            return self.date_published
+            return None
         else:
-            last_upd = (
+            last_updated_ago = (
                 datetime.now(pytz.timezone(settings.TIME_ZONE)) - self.date_updated
             )
-            return last_upd
+            if (last_updated_ago.days % 365) >= 1:
+                return f"{prefix} {last_updated_ago.days % 365} year(s) ago"
+            elif (last_updated_ago.days % 30) >= 1:
+                return f"{prefix} {(last_updated_ago.days % 30)} month(s) ago"
+            elif last_updated_ago.days >= 1:
+                return f"{prefix} {last_updated_ago.days} day(s) ago"
+            elif ((last_updated_ago.seconds / 60) / 60) >= 1:
+                return f"{prefix} {round((last_updated_ago.seconds / 60) / 60)} hour(s) ago"
+            elif (last_updated_ago.seconds / 60) >= 1:
+                return f"{prefix} {round(last_updated_ago.seconds / 60)} minute(s) ago"
+            else:
+                return f"{prefix} less than a minute ago"
