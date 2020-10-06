@@ -1,11 +1,7 @@
 {
-    "python.pythonPath": "venv\\Scripts\\python.exe",
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true,
-    "cSpell.words": [
-        "ckeditor",
-        "ebdjango",
-        "pytz",
-        "uploader"
-    ]
+  "python.pythonPath": "venv\\Scripts\\python.exe",
+  "python.linting.pylintEnabled": true,
+  "python.linting.enabled": true,
+  "python.linting.pylintArgs": ["--load-plugins", "pylint_django"],
+  "cSpell.words": ["ckeditor", "ebdjango", "pytz", "uploader"]
 }

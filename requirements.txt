@@ -3,3 +3,4 @@ psycopg2-binary==2.8.6
 wheel==0.35.1
 pylint==2.6.0
 django_ckeditor==6.0.0
+pylint-django-2.3.0
