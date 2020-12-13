@@ -35,12 +35,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # Third part apps
-    'ckeditor',
-    'ckeditor_uploader',
+    # Third party apps
+    "ckeditor",
+    "ckeditor_uploader",
     # Custom apps
     "site_base",
     "blog",
+    "stocks",
 ]
 
 MIDDLEWARE = [
@@ -139,56 +140,36 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # CKEditor config
-CKEDITOR_UPLOAD_PATH = 'uploads/'
-CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
-CKEDITOR_UPLOAD_PATH = "uploadsCK/" # <-- this folder you uploaded image saved in s3 under media folder 
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_JQUERY_URL = "//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"
+CKEDITOR_UPLOAD_PATH = (
+    "uploadsCK/"  # <-- this folder you uploaded image saved in s3 under media folder
+)
 CKEDITOR_RESTRICT_BY_USER = True
 
-CKEDITOR_CONFIGS={
-  'default': {
-    'width': '100%',
-    'height': 600,
-    'toolbar': 'Custom',
-    'extraPlugins': ','.join([
-      'codesnippet',
-      'youtube'
-    ]),
-    'toolbar_Custom': [
-      [
-        'Bold',
-        'Italic',
-        'Underline'
-      ],
-      [
-        'Font',
-        'FontSize',
-        'TextColor',
-        'BGColor'
-      ],
-      [
-        'NumberedList',
-        'BulletedList',
-        '-',
-        'Outdent',
-        'Indent',
-        '-',
-        'JustifyLeft',
-        'JustifyCenter',
-        'JustifyRight',
-        'JustifyBlock'
-      ],
-      [
-        'Link',
-        'Unlink'
-      ],
-      [
-        'RemoveFormat',
-        'Source',
-        'CodeSnippet',
-        'Image',
-        'Youtube'
-      ]
-    ],
-    
-  },
+CKEDITOR_CONFIGS = {
+    "default": {
+        "width": "100%",
+        "height": 600,
+        "toolbar": "Custom",
+        "extraPlugins": ",".join(["codesnippet", "youtube"]),
+        "toolbar_Custom": [
+            ["Bold", "Italic", "Underline"],
+            ["Font", "FontSize", "TextColor", "BGColor"],
+            [
+                "NumberedList",
+                "BulletedList",
+                "-",
+                "Outdent",
+                "Indent",
+                "-",
+                "JustifyLeft",
+                "JustifyCenter",
+                "JustifyRight",
+                "JustifyBlock",
+            ],
+            ["Link", "Unlink"],
+            ["RemoveFormat", "Source", "CodeSnippet", "Image", "Youtube"],
+        ],
+    },
 }

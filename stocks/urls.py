@@ -1,4 +1,4 @@
-"""ebdjango URL Configuration
+"""stocks URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.1/topics/http/urls/
@@ -13,18 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf import settings
-from django.conf.urls.static import static
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+
+from . import views
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", include("site_base.urls")),
-    path("blog/", include("blog.urls")),
-    path("stocks/", include("stocks.urls")),
-    path("ckeditor/", include("ckeditor_uploader.urls")),
+    path("", views.TransactionList.as_view(), name="index"),
+    path("<int:pk>/", views.TransactionDetail.as_view(), name="detail"),
 ]
-
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
