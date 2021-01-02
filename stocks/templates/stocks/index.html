@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block head_title %} {% endblock head_title %}
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container mt-55">
+        <h1 class="display-4">Transactions</h1>
+        <p class="lead">List of transactions by day.</p>
+    </div>
+</div>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Order ID</th>
+                <th scope="col">Instrument</th>
+                <th scope="col">ISIN</th>
+                <th scope="col">Direction</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total amount</th>
+                <th scope="col">Trading day</th>
+                <th scope="col">Trading time</th>
+                <th scope="col">Commission</th>
+                <th scope="col">Charges and fees</th>
+                <th scope="col">Order Type</th>
+                <th scope="col">Execution venue</th>
+                <th scope="col">Exchange rate</th>
+                <th scope="col">Total cost</th>
+                <th scope="col">Currency</th>
+            </tr>
+        </thead>
+
+        {% if transaction_list %}
+        {% for transaction in transaction_list %}
+        <tbody>
+            <tr>
+                <th scope="row">{{ transaction.id }}</th>
+                <td>{{ transaction.order_id }}</td>
+                <td>{{ transaction.instrument }}</td>
+                <td>{{ transaction.isin }}</td>
+                <td>{{ transaction.direction }}</td>
+                <td>{{ transaction.quantity }}</td>
+                <td>{{ transaction.price }}</td>
+                <td>{{ transaction.total_amount }}</td>
+                <td>{{ transaction.trading_date_time.date }}</td>
+                <td>{{ transaction.trading_date_time.time }}</td>
+                <td>{{ transaction.commission }}</td>
+                <td>{{ transaction.charges_fees }}</td>
+                <td>{{ transaction.order_type }}</td>
+                <td>{{ transaction.execution_venue }}</td>
+                <td>{{ transaction.exchange_rate }}</td>
+                <td>{{ transaction.total_cost }}</td>
+                <td>{{ transaction.currency }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>No transactions are available.</p>
+    {% endif %}
+</div>
+</div>
+
+{% endblock content %}

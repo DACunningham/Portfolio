@@ -1,8 +1,13 @@
 {
-  "python.pythonPath": "venv\\Scripts\\python.exe",
   "python.linting.pylintEnabled": true,
   "python.linting.enabled": true,
-  "python.linting.pylintArgs": ["--load-plugins", "pylint_django"],
-  "python.formatting.blackArgs": ["--line-length", "100"],
-  "cSpell.words": ["ckeditor", "ebdjango", "pytz", "uploader"]
+  "python.linting.pylintArgs": [
+    "--load-plugins",
+    "pylint_django"
+  ],
+  "python.formatting.blackArgs": [
+    "--line-length",
+    "100"
+  ],
+  "python.pythonPath": "C:\\Users\\Dexter\\miniconda3\\envs\\portfolio\\python.exe",
 }
