@@ -1,36 +1,36 @@
 from django.db import models
 
 # Create your models here.
-class Stock(models.Model):
-    """Model definition for Stock."""
+# class Stock(models.Model):
+#     """Model definition for Stock."""
 
-    instrument = models.CharField(max_length=5)
-    full_name = models.CharField(max_length=100)
-    market = models.CharField(
-        max_length=20,
-        choices=[
-            ("NASDAQ", "NASDAQ"),
-            ("NYSE", "New York Stock Exchange"),
-            ("LSE", "London Stock Exchange"),
-        ],
-    )
-    currency = models.CharField(
-        max_length=5,
-        choices=[
-            ("USD", "United States Dollars"),
-            ("GBP", "Great British Pound"),
-        ],
-    )
+#     instrument = models.CharField(max_length=5)
+#     full_name = models.CharField(max_length=100)
+#     market = models.CharField(
+#         max_length=20,
+#         choices=[
+#             ("NASDAQ", "NASDAQ"),
+#             ("NYSE", "New York Stock Exchange"),
+#             ("LSE", "London Stock Exchange"),
+#         ],
+#     )
+#     currency = models.CharField(
+#         max_length=5,
+#         choices=[
+#             ("USD", "United States Dollars"),
+#             ("GBP", "Great British Pound"),
+#         ],
+#     )
 
-    class Meta:
-        """Meta definition for Stock."""
+#     class Meta:
+#         """Meta definition for Stock."""
 
-        verbose_name = "Stock"
-        verbose_name_plural = "Stocks"
+#         verbose_name = "Stock"
+#         verbose_name_plural = "Stocks"
 
-    def __str__(self):
-        """Unicode representation of Stock."""
-        return f"{self.instrument} - {self.full_name}"
+#     def __str__(self):
+#         """Unicode representation of Stock."""
+#         return f"{self.instrument} - {self.full_name}"
 
 
 class Transaction(models.Model):
@@ -41,8 +41,8 @@ class Transaction(models.Model):
     isin = models.CharField(max_length=50)
     direction = models.CharField(max_length=50)
     quantity = models.PositiveIntegerField()
-    price = models.DecimalField(max_digits=9, decimal_places=2)
-    total_amount = models.DecimalField(max_digits=9, decimal_places=2)
+    price = models.DecimalField(max_digits=9, decimal_places=6)
+    total_amount = models.DecimalField(max_digits=9, decimal_places=6)
     trading_date_time = models.DateTimeField(auto_now=False, auto_now_add=False)
     commission = models.DecimalField(max_digits=9, decimal_places=2)
     charges_fees = models.DecimalField(max_digits=9, decimal_places=2)

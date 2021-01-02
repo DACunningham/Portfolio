@@ -19,5 +19,4 @@ from . import views
 
 urlpatterns = [
     path("", views.TransactionList.as_view(), name="index"),
-    path("<int:pk>/", views.TransactionDetail.as_view(), name="detail"),
 ]

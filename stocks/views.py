@@ -5,9 +5,3 @@ from .models import Transaction
 class TransactionList(ListView):
     model = Transaction
     template_name = "stocks/index.html"
-
-
-class TransactionDetail(DetailView):
-    model = Transaction
-    template_name = "stocks/detail.html"
-    context_object_name = "transaction"
