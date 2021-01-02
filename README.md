@@ -1,6 +1,16 @@
 Welcome to the AWS CodeStar sample web application
 ==================================================
 
+To Install This Porject
+-----------------------
+We use mini conda and poetry for our environment management.
+1. Install mini conda
+2. Create an environment called 'portfolio'
+3. Install poetry
+4. Install dependencies from 'poetry.lock' file
+
+Sometimes an error can occur where poetry complains that python.exe or pythonw.exe are not present in: 'C:\Users\<username>\miniconda3\envs\portfolio\Lib\venv\scripts\nt'.  If this is the case then copy these files from: 'C:\Users\Dexter\miniconda3\envs\portfolio' to the '.\Lib\venv\scripts\nt' location.
+
 This sample code helps get you started with a simple Django web application
 deployed by AWS Elastic Beanstalk and AWS CloudFormation.
 
