@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     # Third party apps
     "ckeditor",
     "ckeditor_uploader",
+    "django_extensions",
     # Custom apps
     "site_base",
     "blog",

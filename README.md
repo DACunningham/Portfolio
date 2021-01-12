@@ -14,6 +14,19 @@ Sometimes an error can occur where poetry complains that python.exe or pythonw.e
 This sample code helps get you started with a simple Django web application
 deployed by AWS Elastic Beanstalk and AWS CloudFormation.
 
+Using the Stocks App
+-----------
+There is no easy way around getting the data required from T212 as they do not have an API to call so, the only information one can attain easily and securely is in the contract statements and monthly emails they send.  This requires a user to have access to all of their emails from T212 and then upload them to the app.  To do this a few things must be checked / done:
+
+1. Check a user can retireve all emails from T212 - specifically the emails ref contract statements
+2. Provide user ability to upload '.eml' and '.msg' files to input data into the system
+3. Provide instructions on how to get emails from web email clients.  May have to accept that non - gmail accounts will have to create a gmail account and send all emails to there so, that they can be downloaded immidiately.
+4. An idea could be to have the app set up a gmail account automatically for the user and then use google's api to get the message data from there.  All the user would have to do manually would be to set up an automatic forward of all T212 emails to the new account.  All data can then be parsed automatically with no manual steps with no security holes.
+- A work flow could be... Create portfolio user, app creates gmail & gives address to user, user forwards all emails to app, app gets email info from google api
+- I don't think this idea will work as OAuth requires human interaction to complete the auth process.
+5. a better idea could be to have email addresses set up in AWS programatically which the user sends their emails to.  I can then access them directly via botto3 api and not worry about Outh.
+
+
 What's Here
 -----------
 

@@ -36,41 +36,51 @@ from django.db import models
 class Transaction(models.Model):
     """Model definition for Transaction."""
 
-    order_id = models.CharField(max_length=50)
-    instrument = models.CharField(max_length=50)
-    isin = models.CharField(max_length=50)
-    direction = models.CharField(max_length=50)
-    quantity = models.PositiveIntegerField()
-    price = models.DecimalField(max_digits=9, decimal_places=6)
-    total_amount = models.DecimalField(max_digits=9, decimal_places=6)
-    trading_date_time = models.DateTimeField(auto_now=False, auto_now_add=False)
-    commission = models.DecimalField(max_digits=9, decimal_places=2)
-    charges_fees = models.DecimalField(max_digits=9, decimal_places=2)
-    order_type = models.CharField(
+    transaction_id = models.CharField(max_length=200, blank=True)
+    action = models.CharField(
         max_length=20,
         choices=[
-            ("MARKET", "Market"),
+            ("DEPOSIT", "Deposit"),
+            ("MARKET_BUY", "Market buy"),
+            ("DIVIDEND_ORDINARY", "Dividend (Ordinary)"),
+            ("STOP_LIMIT_SELL", "Stop Limit Sell"),
+            ("STOP_LIMIT_BUY", "Stop Limit Buy"),
         ],
     )
-    execution_venue = models.CharField(
-        max_length=100,
-        choices=[
-            ("NASDAQ", "NASDAQ"),
-            ("NYSE", "New York Stock Exchange"),
-            ("LSE", "London Stock Exchange"),
-            ("OTC", "Over the Counter"),
-        ],
-    )
-    exchange_rate = models.DecimalField(max_digits=4, decimal_places=2)
-    total_cost = models.DecimalField(max_digits=9, decimal_places=2)
+    time = models.DateTimeField()
+    isin = models.CharField(max_length=15, blank=True)
+    name = models.CharField(max_length=200, blank=True)
+    share_quantity = models.DecimalField(max_digits=19, decimal_places=8, null=True)
+    price_per_share = models.DecimalField(max_digits=9, decimal_places=2, null=True)
     currency = models.CharField(
-        max_length=3,
+        max_length=20,
         choices=[
             ("GBP", "Great British Pound"),
+            ("GBX", "Great British Pound in Pence"),
             ("USD", "United States Dollar"),
             ("EUR", "Euro"),
         ],
+        blank=True,
     )
+    exchange_rate = models.DecimalField(max_digits=15, decimal_places=8, null=True)
+    result = models.DecimalField(max_digits=13, decimal_places=2, null=True)
+    total = models.DecimalField(max_digits=13, decimal_places=2, null=True)
+    witholding_tax = models.DecimalField(max_digits=15, decimal_places=8, null=True)
+    witholding_tax_currency = models.CharField(
+        max_length=20,
+        choices=[
+            ("GBP", "Great British Pound"),
+            ("GBX", "Great British Pound in Pence"),
+            ("USD", "United States Dollar"),
+            ("EUR", "Euro"),
+        ],
+        blank=True,
+    )
+    charge_amount = models.DecimalField(max_digits=13, decimal_places=2, null=True)
+    stamp_duty = models.DecimalField(max_digits=9, decimal_places=2, null=True)
+    stamp_duty_reserve_tax = models.DecimalField(max_digits=9, decimal_places=2, null=True)
+    finra_fee = models.DecimalField(max_digits=9, decimal_places=2, null=True)
+    notes = models.CharField(max_length=500, blank=True)
 
     class Meta:
         """Meta definition for Transaction."""
@@ -80,4 +90,4 @@ class Transaction(models.Model):
 
     def __str__(self):
         """Unicode representation of Transaction."""
-        return f"{self.order_id} - {self.instrument}"
+        return f"{self.pk} - {self.action} - {self.isin}"
