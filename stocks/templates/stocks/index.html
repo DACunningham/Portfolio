@@ -13,23 +13,23 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Order ID</th>
-                <th scope="col">Instrument</th>
+                <th scope="col">Trans Id</th>
+                <th scope="col">Action</th>
+                <th scope="col">Time</th>
                 <th scope="col">ISIN</th>
-                <th scope="col">Direction</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Price</th>
-                <th scope="col">Total amount</th>
-                <th scope="col">Trading day</th>
-                <th scope="col">Trading time</th>
-                <th scope="col">Commission</th>
-                <th scope="col">Charges and fees</th>
-                <th scope="col">Order Type</th>
-                <th scope="col">Execution venue</th>
-                <th scope="col">Exchange rate</th>
-                <th scope="col">Total cost</th>
+                <th scope="col">Name</th>
+                <th scope="col">Share Quantity</th>
+                <th scope="col">Price per Share</th>
                 <th scope="col">Currency</th>
+                <th scope="col">Exchange Rate day</th>
+                <th scope="col">Result</th>
+                <th scope="col">Total</th>
+                <th scope="col">Witholding Tax</th>
+                <th scope="col">Charge Amount</th>
+                <th scope="col">Stamp Duty</th>
+                <th scope="col">Stamp Duty Reserve Tax</th>
+                <th scope="col">Finra Fee</th>
+                <th scope="col">Notes</th>
             </tr>
         </thead>
 
@@ -37,23 +37,24 @@
         {% for transaction in transaction_list %}
         <tbody>
             <tr>
-                <th scope="row">{{ transaction.id }}</th>
-                <td>{{ transaction.order_id }}</td>
-                <td>{{ transaction.instrument }}</td>
+                <th scope="row">{{ transaction.transaction_id }}</th>
+                <td>{{ transaction.action }}</td>
+                <td>{{ transaction.time }}</td>
                 <td>{{ transaction.isin }}</td>
-                <td>{{ transaction.direction }}</td>
-                <td>{{ transaction.quantity }}</td>
-                <td>{{ transaction.price }}</td>
-                <td>{{ transaction.total_amount }}</td>
-                <td>{{ transaction.trading_date_time.date }}</td>
-                <td>{{ transaction.trading_date_time.time }}</td>
-                <td>{{ transaction.commission }}</td>
-                <td>{{ transaction.charges_fees }}</td>
-                <td>{{ transaction.order_type }}</td>
-                <td>{{ transaction.execution_venue }}</td>
-                <td>{{ transaction.exchange_rate }}</td>
-                <td>{{ transaction.total_cost }}</td>
+                <td>{{ transaction.name }}</td>
+                <td>{{ transaction.share_quantity }}</td>
+                <td>{{ transaction.price_per_share }}</td>
                 <td>{{ transaction.currency }}</td>
+                <td>{{ transaction.exchange_rate }}</td>
+                <td>{{ transaction.result }}</td>
+                <td>{{ transaction.total }}</td>
+                <td>{{ transaction.witholding_tax }}</td>
+                <td>{{ transaction.witholding_tax_currency }}</td>
+                <td>{{ transaction.charge_amount }}</td>
+                <td>{{ transaction.stamp_duty }}</td>
+                <td>{{ transaction.stamp_duty_reserve_tax }}</td>
+                <td>{{ transaction.finra_fee }}</td>
+                <td>{{ transaction.notes }}</td>
             </tr>
         </tbody>
         {% endfor %}

@@ -1,3 +1,6 @@
+"""
+Defines all models for the stocks application.
+"""
 from django.db import models
 
 # Create your models here.
@@ -87,6 +90,7 @@ class Transaction(models.Model):
 
         verbose_name = "Transaction"
         verbose_name_plural = "Transactions"
+        ordering = ["time"]
 
     def __str__(self):
         """Unicode representation of Transaction."""
