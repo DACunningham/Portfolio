@@ -6,11 +6,11 @@ from typing import Dict
 from .models import Transaction
 
 
-def process_input(data: Dict) -> bool:
+def process_input(data: Dict):
     data.pop(0)
     for line in data:
-        pass
-    return True
+        transaction = process_data_line(line)
+        transaction.save()
 
 
 def process_data_line(data_line: Dict) -> Transaction:

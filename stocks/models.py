@@ -35,6 +35,20 @@ from django.db import models
 #         """Unicode representation of Stock."""
 #         return f"{self.instrument} - {self.full_name}"
 
+ACTIONS = [
+    ("DEPOSIT", "Deposit"),
+    ("MARKET_BUY", "Market buy"),
+    ("DIVIDEND_ORDINARY", "Dividend (Ordinary)"),
+    ("STOP_LIMIT_SELL", "Stop Limit Sell"),
+    ("STOP_LIMIT_BUY", "Stop Limit Buy"),
+]
+CURRENCIES = [
+    ("GBP", "Great British Pound"),
+    ("GBX", "Great British Pound in Pence"),
+    ("USD", "United States Dollar"),
+    ("EUR", "Euro"),
+]
+
 
 class Transaction(models.Model):
     """Model definition for Transaction."""
@@ -42,13 +56,7 @@ class Transaction(models.Model):
     transaction_id = models.CharField(max_length=200, blank=True)
     action = models.CharField(
         max_length=20,
-        choices=[
-            ("DEPOSIT", "Deposit"),
-            ("MARKET_BUY", "Market buy"),
-            ("DIVIDEND_ORDINARY", "Dividend (Ordinary)"),
-            ("STOP_LIMIT_SELL", "Stop Limit Sell"),
-            ("STOP_LIMIT_BUY", "Stop Limit Buy"),
-        ],
+        choices=ACTIONS,
     )
     time = models.DateTimeField()
     isin = models.CharField(max_length=15, blank=True)
@@ -57,12 +65,7 @@ class Transaction(models.Model):
     price_per_share = models.DecimalField(max_digits=9, decimal_places=2, null=True)
     currency = models.CharField(
         max_length=20,
-        choices=[
-            ("GBP", "Great British Pound"),
-            ("GBX", "Great British Pound in Pence"),
-            ("USD", "United States Dollar"),
-            ("EUR", "Euro"),
-        ],
+        choices=CURRENCIES,
         blank=True,
     )
     exchange_rate = models.DecimalField(max_digits=15, decimal_places=8, null=True)
@@ -71,12 +74,7 @@ class Transaction(models.Model):
     witholding_tax = models.DecimalField(max_digits=15, decimal_places=8, null=True)
     witholding_tax_currency = models.CharField(
         max_length=20,
-        choices=[
-            ("GBP", "Great British Pound"),
-            ("GBX", "Great British Pound in Pence"),
-            ("USD", "United States Dollar"),
-            ("EUR", "Euro"),
-        ],
+        choices=CURRENCIES,
         blank=True,
     )
     charge_amount = models.DecimalField(max_digits=13, decimal_places=2, null=True)
