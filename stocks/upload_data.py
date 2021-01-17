@@ -9,11 +9,11 @@ from .models import Transaction
 def process_input(data: Dict):
     data.pop(0)
     for line in data:
-        transaction = process_data_line(line)
+        transaction = _process_data_line(line)
         transaction.save()
 
 
-def process_data_line(data_line: Dict) -> Transaction:
+def _process_data_line(data_line: Dict) -> Transaction:
     """
     docstring
     """

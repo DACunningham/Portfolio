@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block head_title %} {% endblock head_title %}
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container mt-55">
+        <h1 class="display-4">Transactions</h1>
+        <p class="lead">Upload your transactions here.</p>
+    </div>
+</div>
+
+<div class="container">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button type="submit">Upload</button>
+    </form>
+</div>
+
+{% endblock content %}
