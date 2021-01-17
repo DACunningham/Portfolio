@@ -1,3 +1,4 @@
+from typing import Dict
 from django.views.generic import ListView
 from django.contrib.auth.models import User, Group
 from django.http import HttpResponseRedirect
@@ -10,6 +11,8 @@ from rest_framework.response import Response
 from .serializers import UserSerializer, GroupSerializer
 from .models import Transaction
 from .forms import UploadFile
+import csv
+from datetime import datetime
 
 # Create your views here.
 
@@ -22,13 +25,61 @@ def upload_file(request):
             arr = []
             for line in f:
                 parsed_line = line.decode()
-                arr.append((parsed_line))
-            del arr[0]
-            print(arr)
+                arr.append(parsed_line)
+
+            test = csv.DictReader(arr)
+            # for line in test:
+            #     print(line)
+
+            # del arr[0]
+
+            for line in test:
+                transaction = _process_data_line(line)
+                transaction.save()
+            # print(arr)
             return HttpResponseRedirect("/stocks")
     else:
         form = UploadFile()
     return render(request, "stocks/upload.html", {"form": form})
+
+
+def _process_data_line(data_line: Dict) -> Transaction:
+    """
+    docstring
+    """
+    # d = datetime.strftime(data_line["Time"], "%d/%m/%Y %H:%M:%S")
+    # a = datetime.strptime(data_line["Time"], "%d/%m/%Y %H:%M")
+    transaction = Transaction()
+    transaction.transaction_id = data_line["ID"]
+    transaction.action = data_line["Action"]
+    transaction.time = datetime.strptime(data_line["Time"], "%d/%m/%Y %H:%M")
+    transaction.isin = data_line["ISIN"]
+    transaction.name = data_line["Name"]
+    transaction.share_quantity = data_line["No. of shares"] if data_line["No. of shares"] else None
+    transaction.price_per_share = data_line["Price / share"] if data_line["Price / share"] else None
+    transaction.currency = data_line["Currency (Price / share)"]
+    transaction.exchange_rate = data_line["Exchange rate"] if data_line["Exchange rate"] else None
+    transaction.result = data_line["Result (GBP)"] if data_line["Result (GBP)"] else None
+    transaction.total = data_line["Total (GBP)"] if data_line["Total (GBP)"] else None
+    transaction.witholding_tax = (
+        data_line["Withholding tax"] if data_line["Withholding tax"] else None
+    )
+    transaction.witholding_tax_currency = data_line["Currency (Withholding tax)"]
+    transaction.charge_amount = (
+        data_line["Charge amount (GBP)"] if data_line["Charge amount (GBP)"] else None
+    )
+    transaction.stamp_duty = (
+        data_line["Stamp duty (GBP)"] if data_line["Stamp duty (GBP)"] else None
+    )
+    transaction.stamp_duty_reserve_tax = (
+        data_line["Stamp duty reserve tax (GBP)"]
+        if data_line["Stamp duty reserve tax (GBP)"]
+        else None
+    )
+    transaction.finra_fee = data_line["Finra fee (GBP)"] if data_line["Finra fee (GBP)"] else None
+    transaction.notes = data_line["Notes"]
+
+    return transaction
 
 
 class TransactionList(ListView):
