@@ -37,10 +37,13 @@ from django.db import models
 
 ACTIONS = [
     ("DEPOSIT", "Deposit"),
-    ("MARKET_BUY", "Market buy"),
+    ("DIVIDEND_DEMERGER", "Dividend (Demerger)"),
     ("DIVIDEND_ORDINARY", "Dividend (Ordinary)"),
+    ("MARKET_BUY", "Market buy"),
+    ("MARKET_SELL", "Market sell"),
     ("STOP_LIMIT_SELL", "Stop Limit Sell"),
     ("STOP_LIMIT_BUY", "Stop Limit Buy"),
+    ("WITHDRAWAL", "Withdrawal"),
 ]
 CURRENCIES = [
     ("GBP", "Great British Pound"),

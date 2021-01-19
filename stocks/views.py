@@ -13,6 +13,7 @@ from .models import Transaction
 from .forms import UploadFile
 import csv
 from datetime import datetime
+from decimal import Decimal
 
 # Create your views here.
 
@@ -52,13 +53,15 @@ def _process_data_line(data_line: Dict) -> Transaction:
     transaction = Transaction()
     transaction.transaction_id = data_line["ID"]
     transaction.action = data_line["Action"]
-    transaction.time = datetime.strptime(data_line["Time"], "%d/%m/%Y %H:%M")
+    transaction.time = datetime.strptime(data_line["Time"], "%Y-%m-%d %H:%M:%S")
     transaction.isin = data_line["ISIN"]
     transaction.name = data_line["Name"]
     transaction.share_quantity = data_line["No. of shares"] if data_line["No. of shares"] else None
     transaction.price_per_share = data_line["Price / share"] if data_line["Price / share"] else None
     transaction.currency = data_line["Currency (Price / share)"]
-    transaction.exchange_rate = data_line["Exchange rate"] if data_line["Exchange rate"] else None
+    transaction.exchange_rate = (
+        _not_available_check(data_line["Exchange rate"]) if data_line["Exchange rate"] else None
+    )
     transaction.result = data_line["Result (GBP)"] if data_line["Result (GBP)"] else None
     transaction.total = data_line["Total (GBP)"] if data_line["Total (GBP)"] else None
     transaction.witholding_tax = (
@@ -80,6 +83,12 @@ def _process_data_line(data_line: Dict) -> Transaction:
     transaction.notes = data_line["Notes"]
 
     return transaction
+
+
+def _not_available_check(item_to_test):
+    if isinstance(item_to_test, Decimal):
+        return item_to_test
+    return None
 
 
 class TransactionList(ListView):
