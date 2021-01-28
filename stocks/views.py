@@ -3,6 +3,7 @@ from django.views.generic import ListView
 from django.contrib.auth.models import User, Group
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework import viewsets, permissions, status
 from rest_framework.exceptions import ParseError
 from rest_framework.parsers import FileUploadParser
@@ -91,12 +92,12 @@ def _not_available_check(item_to_test):
     return None
 
 
-class TransactionList(ListView):
+class TransactionList(LoginRequiredMixin, ListView):
     model = Transaction
     template_name = "stocks/index.html"
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
@@ -106,7 +107,7 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class GroupViewSet(viewsets.ModelViewSet):
+class GroupViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
@@ -116,13 +117,13 @@ class GroupViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class TransactionViewSet(viewsets.ModelViewSet):
+class TransactionViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [permissions.AllowAny]
 
 
-class MyFileView(APIView):
+class MyFileView(LoginRequiredMixin, APIView):
     # MultiPartParser AND FormParser
     # https://www.django-rest-framework.org/api-guide/parsers/#multipartparser
     # "You will typically want to use both FormParser and MultiPartParser

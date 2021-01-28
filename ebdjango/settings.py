@@ -57,6 +57,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "ebdjango.urls"
+LOGIN_REDIRECT_URL = "/"
 
 TEMPLATES = [
     {
