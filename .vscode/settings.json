@@ -9,5 +9,5 @@
     "--line-length",
     "100"
   ],
-  "python.pythonPath": "C:\\Users\\Dexter\\miniconda3\\envs\\portfolio\\python.exe",
+  "python.pythonPath": "c:\\Users\\Dexter\\source\\repos\\portfolio\\venv\\Scripts\\python.exe",
 }

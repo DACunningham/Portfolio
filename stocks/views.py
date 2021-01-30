@@ -4,12 +4,13 @@ from django.contrib.auth.models import User, Group
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
-from rest_framework import viewsets, permissions, status
-from rest_framework.exceptions import ParseError
-from rest_framework.parsers import FileUploadParser
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from .serializers import UserSerializer, GroupSerializer
+
+# from rest_framework import viewsets, permissions, status
+# from rest_framework.exceptions import ParseError
+# from rest_framework.parsers import FileUploadParser
+# from rest_framework.views import APIView
+# from rest_framework.response import Response
+# from .serializers import UserSerializer, GroupSerializer
 from .models import Transaction
 from .forms import UploadFile
 import csv
@@ -97,60 +98,60 @@ class TransactionList(LoginRequiredMixin, ListView):
     template_name = "stocks/index.html"
 
 
-class UserViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
+# class UserViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
+#     """
+#     API endpoint that allows users to be viewed or edited.
+#     """
 
-    queryset = User.objects.all().order_by("-date_joined")
-    serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
-class GroupViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-    permission_classes = [permissions.IsAuthenticated]
+#     queryset = User.objects.all().order_by("-date_joined")
+#     serializer_class = UserSerializer
+#     permission_classes = [permissions.IsAuthenticated]
 
 
-class TransactionViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-    permission_classes = [permissions.AllowAny]
+# class GroupViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
+#     """
+#     API endpoint that allows groups to be viewed or edited.
+#     """
+
+#     queryset = Group.objects.all()
+#     serializer_class = GroupSerializer
+#     permission_classes = [permissions.IsAuthenticated]
 
 
-class MyFileView(LoginRequiredMixin, APIView):
-    # MultiPartParser AND FormParser
-    # https://www.django-rest-framework.org/api-guide/parsers/#multipartparser
-    # "You will typically want to use both FormParser and MultiPartParser
-    # together in order to fully support HTML form data."
-    parser_classes = [FileUploadParser]
+# class TransactionViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
+#     queryset = Group.objects.all()
+#     serializer_class = GroupSerializer
+#     permission_classes = [permissions.AllowAny]
 
-    def post(self, request, *args, **kwargs):
-        if "file" not in request.data:
-            raise ParseError("Not file uploaded")
 
-        f = request.data["file"]
-        arr = []
-        for line in f:
-            parsed_line = line.decode()
-            arr.append((parsed_line))
-        # with open(f, newline="") as file:
-        #     reader = csv.DictReader(file)
-        #     # for line in reader:
-        #     #     print(line)
-        #     # print(reader[1])
+# class MyFileView(LoginRequiredMixin, APIView):
+#     # MultiPartParser AND FormParser
+#     # https://www.django-rest-framework.org/api-guide/parsers/#multipartparser
+#     # "You will typically want to use both FormParser and MultiPartParser
+#     # together in order to fully support HTML form data."
+#     parser_classes = [FileUploadParser]
 
-        # mymodel.my_file_field.save(f.name, f, save=True)
-        return Response(status=status.HTTP_200_OK)
+#     def post(self, request, *args, **kwargs):
+#         if "file" not in request.data:
+#             raise ParseError("Not file uploaded")
 
-        # file_serializer = UserDataUploadSerializer(data=request.data)
-        # if file_serializer.is_valid():
-        #     file_serializer.save()
-        #     return Response(file_serializer.data, status=status.HTTP_201_CREATED)
-        # else:
-        #     return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#         f = request.data["file"]
+#         arr = []
+#         for line in f:
+#             parsed_line = line.decode()
+#             arr.append((parsed_line))
+#         # with open(f, newline="") as file:
+#         #     reader = csv.DictReader(file)
+#         #     # for line in reader:
+#         #     #     print(line)
+#         #     # print(reader[1])
+
+#         # mymodel.my_file_field.save(f.name, f, save=True)
+#         return Response(status=status.HTTP_200_OK)
+
+#         # file_serializer = UserDataUploadSerializer(data=request.data)
+#         # if file_serializer.is_valid():
+#         #     file_serializer.save()
+#         #     return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+#         # else:
+#         #     return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
