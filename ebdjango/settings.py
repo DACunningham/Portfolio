@@ -27,12 +27,15 @@ SECRET_KEY = get_secret()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get("DJANGO_DEBUG", True))
 ALLOWED_HOSTS = [
+    "divolio.co.uk",
+    "www.divolio.co.uk",
     "portfolioapp.eba-8vvk66jn.eu-west-2.elasticbeanstalk.com",
     "127.0.0.1",
+    "localhost",
 ]
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
 
 
 # Application definition
