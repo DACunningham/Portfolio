@@ -30,6 +30,7 @@ ALLOWED_HOSTS = [
     "divolio.co.uk",
     "www.divolio.co.uk",
     "portfolioapp.eba-8vvk66jn.eu-west-2.elasticbeanstalk.com",
+    "ec2-35-176-173-56.eu-west-2.compute.amazonaws.com",
     "127.0.0.1",
     "localhost",
 ]
