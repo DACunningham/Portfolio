@@ -21,13 +21,22 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = get_secret()
 
+################################################################################
+##                      SETTINGS TO CHANGE FOR PROD                           ##
+################################################################################
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get("DJANGO_DEBUG", True))
+ALLOWED_HOSTS = [
+    "ec2-3-9-66-32.eu-west-2.compute.amazonaws.com",
+    "divolio.co.uk",
+    "www.divolio.co.uk" "127.0.0.1",
+]
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
 
-ALLOWED_HOSTS = ["ec2-3-9-66-32.eu-west-2.compute.amazonaws.com", "divolio.co.uk", "127.0.0.1"]
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
