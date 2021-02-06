@@ -27,12 +27,12 @@ SECRET_KEY = get_secret()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get("DJANGO_DEBUG", True))
 ALLOWED_HOSTS = [
-    "divolio.co.uk",
+    "*.divolio.co.uk",
     "www.divolio.co.uk",
-    "portfolioapp.eba-8vvk66jn.eu-west-2.elasticbeanstalk.com",
-    "ec2-35-176-173-56.eu-west-2.compute.amazonaws.com",
-    "127.0.0.1",
-    "localhost",
+    # "portfolioapp.eba-8vvk66jn.eu-west-2.elasticbeanstalk.com",
+    # "ec2-35-176-173-56.eu-west-2.compute.amazonaws.com",
+    # "127.0.0.1",
+    # "localhost",
 ]
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
