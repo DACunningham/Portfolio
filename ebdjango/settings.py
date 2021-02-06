@@ -25,7 +25,9 @@ SECRET_KEY = get_secret()
 ##                      SETTINGS TO CHANGE FOR PROD                           ##
 ################################################################################
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get("DJANGO_DEBUG", True))
+DEBUG = os.environ.get("DJANGO_DEBUG", True)
+# print(DEBUG)
+# print(os.environ.get("DJANGO_DEBUG"))
 ALLOWED_HOSTS = [
     "*.divolio.co.uk",
     "www.divolio.co.uk",
