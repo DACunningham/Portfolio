@@ -25,7 +25,10 @@ SECRET_KEY = get_secret()
 ##                      SETTINGS TO CHANGE FOR PROD                           ##
 ################################################################################
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DJANGO_DEBUG", True)
+# os.environ["DJANGO_DEBUG"] = "False"
+print(os.getenv("DJANGO_DEBUG"))
+DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
+print(DEBUG)
 # print(DEBUG)
 # print(os.environ.get("DJANGO_DEBUG"))
 ALLOWED_HOSTS = [
