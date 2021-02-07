@@ -16,39 +16,25 @@ from .utils import get_secret
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
-
-SECRET_KEY = get_secret()
-
 ################################################################################
 ##                      SETTINGS TO CHANGE FOR PROD                           ##
 ################################################################################
-# SECURITY WARNING: don't run with debug turned on in production!
-# os.environ["DJANGO_DEBUG"] = "False"
+IN_DEVELOPMENT = "False"
+################################################################################
 
-os.environ.setdefault("DJANGO_DEBUG", "False")
-vars = str(os.environ)
+if IN_DEVELOPMENT == "True":
+    os.environ.setdefault("DJANGO_DEBUG", IN_DEVELOPMENT)
+    DEBUG = os.getenv("DJANGO_DEBUG") == "True"
+    ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+    SECRET_KEY = "IN_DEVELOPMENT"
+else:
+    os.environ.setdefault("DJANGO_DEBUG", IN_DEVELOPMENT)
+    DEBUG = os.getenv("DJANGO_DEBUG") == "True"
+    ALLOWED_HOSTS = ["*.divolio.co.uk", "www.divolio.co.uk"]
+    SECRET_KEY = get_secret()
 
-with open("vars.txt", "w") as file:
-    file.write(vars)
-
-print(os.getenv("DJANGO_DEBUG"))
-DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
-print(DEBUG)
-# print(DEBUG)
-# print(os.environ.get("DJANGO_DEBUG"))
-ALLOWED_HOSTS = [
-    "*.divolio.co.uk",
-    "www.divolio.co.uk",
-    # "portfolioapp.eba-8vvk66jn.eu-west-2.elasticbeanstalk.com",
-    # "ec2-35-176-173-56.eu-west-2.compute.amazonaws.com",
-    # "127.0.0.1",
-    # "localhost",
-]
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
-# SECURE_SSL_REDIRECT = True
 
 
 # Application definition

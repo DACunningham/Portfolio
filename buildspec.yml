@@ -11,7 +11,6 @@ phases:
   pre_build:
     commands:
       # Discover and run unit tests. For more information, see <https://docs.djangoproject.com/en/2.0/topics/testing/overview/>
-      - export DJANGO_DEBUG=False
       - python manage.py makemigrations
       - python manage.py migrate
       - python manage.py test
