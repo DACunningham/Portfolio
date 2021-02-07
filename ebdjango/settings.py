@@ -26,6 +26,12 @@ SECRET_KEY = get_secret()
 ################################################################################
 # SECURITY WARNING: don't run with debug turned on in production!
 # os.environ["DJANGO_DEBUG"] = "False"
+
+vars = str(os.environ)
+
+with open("vars.txt", "w") as file:
+    file.write(vars)
+
 print(os.getenv("DJANGO_DEBUG"))
 DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
 print(DEBUG)
